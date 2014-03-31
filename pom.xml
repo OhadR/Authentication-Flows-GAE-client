@@ -26,12 +26,13 @@
 		</dependency>
 	    
 		<!-- to use the Google App Engine APIs, declare a build dependency using 
-			the following artifact: - ->
+			the following artifact: -->
 		<dependency>
 			<groupId>com.google.appengine</groupId>
 			<artifactId>appengine-api-1.0-sdk</artifactId>
 			<version>${appengine.target.version}</version>
-		</dependency-->
+		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>

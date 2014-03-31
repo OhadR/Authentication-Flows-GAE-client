@@ -1,10 +1,14 @@
 package com.ohadr.dictionary.jdbc;
 
-import com.google.appengine.api.datastore.*;
-import org.springframework.security.core.GrantedAuthority;
-import java.util.*;
 import com.ohadr.dictionary.gae.AppRole;
 import com.ohadr.dictionary.interfaces.*;
+import com.google.appengine.api.datastore.*;
+
+import org.apache.log4j.Logger;
+import org.springframework.security.core.GrantedAuthority;
+
+import java.util.*;
+
 
 public class GaeDatastoreUserRegistry implements UserRegistry
 {
@@ -15,6 +19,8 @@ public class GaeDatastoreUserRegistry implements UserRegistry
     private static final String USER_EMAIL = "email";
     private static final String USER_ENABLED = "enabled";
     private static final String USER_AUTHORITIES = "authorities";
+
+    private static final Logger logger = Logger.getLogger(GaeDatastoreUserRegistry.class.getName());
 
     public GaeUser findUser(String userId) {
         Key key = KeyFactory.createKey(USER_TYPE, userId);
@@ -32,7 +38,7 @@ public class GaeDatastoreUserRegistry implements UserRegistry
                 }
             }
 
-            GaeUser gaeUser = new GaeUser(
+            GaeUser gaeUser = new GaeUserImpl(
                     user.getKey().getName(),
                     (String)user.getProperty(USER_NICKNAME),
                     (String)user.getProperty(USER_EMAIL),
