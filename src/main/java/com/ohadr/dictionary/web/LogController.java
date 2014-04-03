@@ -33,13 +33,13 @@ public class LogController
 
 	}
 	
-	@RequestMapping(value = "/testGet")	
-	protected void log2(
+	@RequestMapping(value = "/ping")	
+	protected void ping(
 			HttpServletRequest request,
 			HttpServletResponse response) throws Exception
 	{
-		System.out.print( "testGet" );
-		response.getWriter().println("testGet response");
+		System.out.print( "pong" );
+		response.getWriter().println("ping response: pong");
 
 	}
 	

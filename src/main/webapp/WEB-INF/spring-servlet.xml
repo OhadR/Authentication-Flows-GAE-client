@@ -16,11 +16,12 @@
 
 	<context:annotation-config />
 	
-	<!-- NOTE: the revision.properties is created by 'hudson' on build time (but we need it in env if want to test locally) - ->
-	<context:property-placeholder
- 		location="classpath:default.properties" /-->
+    <context:property-placeholder location="classpath:client.properties" />
 
 	<context:component-scan base-package="com.ohadr.dictionary" />
+	<context:component-scan base-package="com.ohadr.auth_flows" />
+	<context:component-scan base-package="com.ohadr.crypto" />
+			
 
 	<!-- The following is a must for Spring MVC JSON mapping. -->
 	<mvc:annotation-driven />
@@ -80,12 +81,14 @@
 	</bean-->	
 	
 	<!-- decide how you wanna work: in-mem repo, or jdbc impl: -->
-    <!-- bean class="com.ohadr.auth_flows.mocks.InMemoryAuthenticationAccountRepositoryImpl" /-->
+	<!-- TODO: create GAE-AuthenticationAccountRepositoryImpl : -->
+    <bean class="com.ohadr.auth_flows.mocks.InMemoryAuthenticationAccountRepositoryImpl" />
     <!-- bean class="com.ohadr.auth_flows.core.jdbc.JdbcAuthenticationAccountRepositoryImpl" /-->
     <!-- bean id="userDetailsService" class="com.ohadr.auth_flows.core.jdbc.JdbcAuthenticationAccountRepositoryImpl" /-->
 
-    <!-- bean class="com.ohadr.auth_flows.core.jdbc.JdbcAuthenticationPolicyRepositoryImpl" /-->
-
+    <!--bean class="com.ohadr.auth_flows.core.jdbc.JdbcAuthenticationPolicyRepositoryImpl" /-->
+    <bean class="com.ohadr.auth_flows.mocks.MockAuthenticationPolicyRepositoryImpl" />
+        
     <!-- data-source - ->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.jamonapi.proxy.JAMonDriver"/>
