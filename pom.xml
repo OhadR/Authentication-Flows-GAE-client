@@ -22,7 +22,7 @@
 	    <dependency>
 			<groupId>com.ohadr</groupId>
 			<artifactId>authentication-flows</artifactId>
-			<version>1.1.4</version>
+			<version>1.1.5-SNAPSHOT</version>
 		</dependency>
 	    
 		<!-- to use the Google App Engine APIs, declare a build dependency using 

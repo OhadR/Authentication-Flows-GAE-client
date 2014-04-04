@@ -76,9 +76,9 @@
 		</sec:authentication-provider>
 	</sec:authentication-manager-->		
 
-	<!-- bean id="passwordEncoder" 	class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
+	<bean id="passwordEncoder" 	class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
 		<constructor-arg value="256"/>
-	</bean-->	
+	</bean>	
 	
 	<!-- decide how you wanna work: in-mem repo, or jdbc impl: -->
 	<!-- TODO: create GAE-AuthenticationAccountRepositoryImpl : -->
@@ -103,7 +103,20 @@
         <property name="minPoolSize" value="5"/>
     </bean-->
 			
-	
+
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<property name="host" value="smtp.gmail.com" />
+		<property name="port" value="587" />
+		<property name="username" value="ohadr.developer@gmail.com" />
+		<property name="password" value="******" />
+
+		<property name="javaMailProperties">
+			<props>
+				<prop key="mail.smtp.auth">true</prop>
+				<prop key="mail.smtp.starttls.enable">true</prop>
+			</props>
+		</property>
+	</bean>	
 		
 
 
