@@ -23,6 +23,12 @@
 			<groupId>com.ohadr</groupId>
 			<artifactId>authentication-flows</artifactId>
 			<version>1.1.5-SNAPSHOT</version>
+			<exclusions>
+			    <exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+			    </exclusion>
+			</exclusions>
 		</dependency>
 	    
 		<!-- to use the Google App Engine APIs, declare a build dependency using 
