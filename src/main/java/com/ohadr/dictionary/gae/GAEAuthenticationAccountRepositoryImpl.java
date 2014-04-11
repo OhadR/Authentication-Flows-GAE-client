@@ -98,11 +98,11 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		try 
 		{
 			entity = datastore.get(userKey);
-			log.info("GAEAuthenticationAccountRepositoryImpl: got entity of " + username + ": " + entity);
+			log.info("got entity of " + username + ": " + entity);
 		} 
 		catch (EntityNotFoundException e) 
 		{
-			log.error("GAEAuthenticationAccountRepositoryImpl: entity of " + username + " not found");
+			log.error("entity of " + username + " not found");
 //			throw new UsernameNotFoundException(e.getMessage(), e);
 			return null;
 		}
@@ -137,11 +137,11 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		try 
 		{
 			entity = datastore.get(userKey);
-			log.debug("GAEAuthenticationAccountRepositoryImpl.setEnabledFlag(): got entity of " + username + ": " + entity);
+			log.debug("got entity of " + username + ": " + entity);
 		} 
 		catch (EntityNotFoundException e) 
 		{
-			log.error("GAEAuthenticationAccountRepositoryImpl: entity of " + username + " not found");
+			log.error("entity of " + username + " not found");
 			throw new NoSuchElementException(e.getMessage());
 		}
 		
@@ -157,11 +157,11 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		try 
 		{
 			entity = datastore.get(userKey);
-			log.debug("GAEAuthenticationAccountRepositoryImpl.updateLoginAttemptsCounter(): got entity of " + username + ": " + entity);
+			log.debug("got entity of " + username + ": " + entity);
 		} 
 		catch (EntityNotFoundException e) 
 		{
-			log.error("GAEAuthenticationAccountRepositoryImpl: entity of " + username + " not found");
+			log.error("entity of " + username + " not found");
 			throw new NoSuchElementException(e.getMessage());
 		}
 		
@@ -177,11 +177,11 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		try 
 		{
 			entity = datastore.get(userKey);
-			log.debug("GAEAuthenticationAccountRepositoryImpl.updateLoginAttemptsCounter(): got entity of " + username + ": " + entity);
+			log.debug("got entity of " + username + ": " + entity);
 		} 
 		catch (EntityNotFoundException e) 
 		{
-			log.error("GAEAuthenticationAccountRepositoryImpl: entity of " + username + " not found");
+			log.error("entity of " + username + " not found");
 			throw new NoSuchElementException(e.getMessage());
 		}
 		
