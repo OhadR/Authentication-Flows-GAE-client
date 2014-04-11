@@ -125,7 +125,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 						(String)entity.getProperty(PASSWORD_PROP_NAME),
 						isEnabled,
 						loginAttemptsLeft,
-						(Date)entity.getProperty("PasswordLastChangeDate"));
+						(Date)entity.getProperty(LAST_PSWD_CHANGE_DATE_PROP_NAME));
 		
 	}
 
