@@ -40,10 +40,9 @@
 		<sec:intercept-url pattern="/secure/**" access="ROLE_USER" />
 		<sec:anonymous/>
 
-        <!-- sec:form-login/-->
-        
 		<sec:form-login 
 			login-page="/login/login.htm" 
+			authentication-success-handler-ref="authenticationSuccessHandler"
 			authentication-failure-url="/login/login.htm?login_error=1" />
 
         <!-- sec:remember-me 
@@ -54,27 +53,14 @@
 	</sec:http>
 	
 	
-    <sec:authentication-manager alias="authenticationManager">
-        <sec:authentication-provider user-service-ref="userDetailsService"/>
-	</sec:authentication-manager>
 
-    <sec:user-service id="userDetailsService">
-				<sec:user name="admin
-				    " password="admin" authorities="ROLE_USER" />
-				<sec:user name="demo@ohadr.com" password="demo" authorities="ROLE_USER" />
-    </sec:user-service>
-    
-    
-    
-	
-	
-	<!-- sec:authentication-manager alias="authenticationManager">
+	<sec:authentication-manager alias="authenticationManager">
 		<sec:authentication-provider user-service-ref="userDetailsService" >
 			<sec:password-encoder hash="sha-256">
 				<sec:salt-source user-property="username"/>
 			</sec:password-encoder>
 		</sec:authentication-provider>
-	</sec:authentication-manager-->		
+	</sec:authentication-manager>		
 
 	<bean id="passwordEncoder" 	class="org.springframework.security.authentication.encoding.ShaPasswordEncoder">
 		<constructor-arg value="256"/>
@@ -83,7 +69,7 @@
 	<!-- decide how you wanna work: in-mem repo, or jdbc impl: -->
     <!-- bean class="com.ohadr.auth_flows.mocks.InMemoryAuthenticationAccountRepositoryImpl" / -->
     <!-- bean id="userDetailsService" class="com.ohadr.auth_flows.core.jdbc.JdbcAuthenticationAccountRepositoryImpl" /-->
-    <bean class="com.ohadr.dictionary.gae.GAEAuthenticationAccountRepositoryImpl" />
+    <bean id="userDetailsService" class="com.ohadr.dictionary.gae.GAEAuthenticationAccountRepositoryImpl" />
 
     <!--bean class="com.ohadr.auth_flows.core.jdbc.JdbcAuthenticationPolicyRepositoryImpl" /-->
     <bean class="com.ohadr.auth_flows.mocks.MockAuthenticationPolicyRepositoryImpl" />

@@ -1,6 +1,7 @@
 package com.ohadr.dictionary.gae;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,7 @@ import com.ohadr.auth_flows.mocks.InMemoryAuthenticationUserImpl;
 public class GAEAuthenticationAccountRepositoryImpl extends
 		AbstractAuthenticationAccountRepository 
 {
+	private static final String PASSWORD_PROP_NAME = "password";
 	private static final String LOGIN_ATTEMPTS_LEFT_PROP_NAME = "loginAttemptsLeft";
 	private static final String ENABLED_PROP_NAME = "enabled";
 	private static final String LAST_PSWD_CHANGE_DATE_PROP_NAME = "lastPasswordChangeDate";
@@ -44,9 +46,9 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 	}
 
 	@Override
-	public void setPassword(String arg0, String arg1) {
-		// TODO Auto-generated method stub
-		
+	public void setPassword(String username, String newEncodedPassword)
+	{
+		changePassword(username, newEncodedPassword);
 	}
 
 	@Override
@@ -57,7 +59,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		Entity dbUser = new Entity(USER_DB_KIND, user.getUsername());		//the username is the key
 
 		dbUser.setProperty("username", user.getUsername());
-		dbUser.setProperty("password", user.getPassword());
+		dbUser.setProperty(PASSWORD_PROP_NAME, user.getPassword());
 		dbUser.setProperty(ENABLED_PROP_NAME, user.isEnabled());
 		dbUser.setProperty(LOGIN_ATTEMPTS_LEFT_PROP_NAME, authUser.getLoginAttemptsLeft());
 		dbUser.setProperty(LAST_PSWD_CHANGE_DATE_PROP_NAME, new Date( System.currentTimeMillis()) );
@@ -79,11 +81,6 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		
 	}
 
-	@Override
-	public void changePassword(String oldPassword, String newPassword) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public boolean userExists(String username) {
@@ -125,7 +122,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 
 		return new InMemoryAuthenticationUserImpl(
 						username, 
-						(String)entity.getProperty("password"),
+						(String)entity.getProperty(PASSWORD_PROP_NAME),
 						isEnabled,
 						loginAttemptsLeft,
 						(Date)entity.getProperty("PasswordLastChangeDate"));
@@ -140,13 +137,12 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		try 
 		{
 			entity = datastore.get(userKey);
-			log.info("GAEAuthenticationAccountRepositoryImpl: got entity of " + username + ": " + entity);
+			log.debug("GAEAuthenticationAccountRepositoryImpl.setEnabledFlag(): got entity of " + username + ": " + entity);
 		} 
 		catch (EntityNotFoundException e) 
 		{
 			log.error("GAEAuthenticationAccountRepositoryImpl: entity of " + username + " not found");
-//			throw new UsernameNotFoundException(e.getMessage(), e);
-			return;
+			throw new NoSuchElementException(e.getMessage());
 		}
 		
 		entity.setProperty(ENABLED_PROP_NAME, flag);				
@@ -154,9 +150,44 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 	}
 
 	@Override
-	protected void updateLoginAttemptsCounter(String arg0, int arg1) {
-		// TODO Auto-generated method stub
+	protected void updateLoginAttemptsCounter(String username, int attempts) 
+	{
+		Key userKey = KeyFactory.createKey(USER_DB_KIND, username);
+		Entity entity;
+		try 
+		{
+			entity = datastore.get(userKey);
+			log.debug("GAEAuthenticationAccountRepositoryImpl.updateLoginAttemptsCounter(): got entity of " + username + ": " + entity);
+		} 
+		catch (EntityNotFoundException e) 
+		{
+			log.error("GAEAuthenticationAccountRepositoryImpl: entity of " + username + " not found");
+			throw new NoSuchElementException(e.getMessage());
+		}
 		
+		entity.setProperty(LOGIN_ATTEMPTS_LEFT_PROP_NAME, attempts);				
+		datastore.put(entity);	
+	}
+
+	@Override
+	public void changePassword(String username, String newEncodedPassword) 
+	{
+		Key userKey = KeyFactory.createKey(USER_DB_KIND, username);
+		Entity entity;
+		try 
+		{
+			entity = datastore.get(userKey);
+			log.debug("GAEAuthenticationAccountRepositoryImpl.updateLoginAttemptsCounter(): got entity of " + username + ": " + entity);
+		} 
+		catch (EntityNotFoundException e) 
+		{
+			log.error("GAEAuthenticationAccountRepositoryImpl: entity of " + username + " not found");
+			throw new NoSuchElementException(e.getMessage());
+		}
+		
+		entity.setProperty(LAST_PSWD_CHANGE_DATE_PROP_NAME, new Date( System.currentTimeMillis()));
+		entity.setProperty(PASSWORD_PROP_NAME, newEncodedPassword);
+		datastore.put(entity);	
 	}
 
 }
