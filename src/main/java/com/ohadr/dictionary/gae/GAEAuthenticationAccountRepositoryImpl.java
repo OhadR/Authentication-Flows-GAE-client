@@ -99,7 +99,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		try 
 		{
 			entity = datastore.get(userKey);
-			log.info("got entity of " + username + ": " + entity);
+			log.debug("got entity of " + username + ": " + entity);
 		} 
 		catch (EntityNotFoundException e) 
 		{
@@ -132,7 +132,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 
 
 	@Override
-	protected void setEnabledFlag(String username, boolean flag) 
+	protected void setEnabledFlag(String username, boolean flag) throws NoSuchElementException
 	{
 		Key userKey = KeyFactory.createKey(USER_DB_KIND, username);
 		Entity entity;
@@ -152,7 +152,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 	}
 
 	@Override
-	protected void updateLoginAttemptsCounter(String username, int attempts) 
+	protected void updateLoginAttemptsCounter(String username, int attempts) throws NoSuchElementException
 	{
 //		FlowsUtil.logStackTrace( log );
 
