@@ -43,7 +43,7 @@
 		<sec:form-login 
 			login-page="/login/login.htm" 
 			authentication-success-handler-ref="authenticationSuccessHandler"
-			authentication-failure-url="/login/login.htm?login_error=1" />
+			authentication-failure-handler-ref="authenticationFailureHandler" />
 
         <!-- sec:remember-me 
 			data-source-ref="dataSource"
@@ -66,6 +66,12 @@
 		<constructor-arg value="256"/>
 	</bean>	
 	
+	<bean id="authenticationFailureHandler" class="com.ohadr.auth_flows.core.AuthenticationFailureHandler">
+		<constructor-arg value="/login/login.htm?login_error=1"/>
+		<property name="accountLockedUrl" value="/login/accountLocked.htm" />
+	</bean>
+	
+		
 	<!-- decide how you wanna work: in-mem repo, or jdbc impl: -->
     <!-- bean class="com.ohadr.auth_flows.mocks.InMemoryAuthenticationAccountRepositoryImpl" / -->
     <!-- bean id="userDetailsService" class="com.ohadr.auth_flows.core.jdbc.JdbcAuthenticationAccountRepositoryImpl" /-->
