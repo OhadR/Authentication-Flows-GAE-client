@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.google.appengine.api.datastore.*;
 import com.ohadr.auth_flows.core.AbstractAuthenticationAccountRepository;
+import com.ohadr.auth_flows.core.FlowsUtil;
 import com.ohadr.auth_flows.interfaces.AuthenticationUser;
 import com.ohadr.auth_flows.mocks.InMemoryAuthenticationUserImpl;
 
@@ -88,10 +89,10 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		return false;
 	}
 
-	 //TODO: be Spring-compatible, and use UsernameNotFoundException, and never return null
+
 	@Override
 	public UserDetails loadUserByUsername(String username)
-//			throws UsernameNotFoundException
+			throws UsernameNotFoundException
 	{
 		Key userKey = KeyFactory.createKey(USER_DB_KIND, username);
 		Entity entity;
@@ -103,8 +104,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		catch (EntityNotFoundException e) 
 		{
 			log.error("entity of " + username + " not found");
-//			throw new UsernameNotFoundException(e.getMessage(), e);
-			return null;
+			throw new UsernameNotFoundException(username, e);
 		}
 		
 		boolean isEnabled = false;
@@ -117,6 +117,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		Object loginAttemptsLeftObj = entity.getProperty(LOGIN_ATTEMPTS_LEFT_PROP_NAME);
 		if( null != loginAttemptsLeftObj )
 		{
+			//"hack"  convert Object to int:
 			loginAttemptsLeft = new Integer(loginAttemptsLeftObj.toString());
 		}
 
@@ -128,6 +129,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 						(Date)entity.getProperty(LAST_PSWD_CHANGE_DATE_PROP_NAME));
 		
 	}
+
 
 	@Override
 	protected void setEnabledFlag(String username, boolean flag) 
@@ -152,6 +154,8 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 	@Override
 	protected void updateLoginAttemptsCounter(String username, int attempts) 
 	{
+//		FlowsUtil.logStackTrace( log );
+
 		Key userKey = KeyFactory.createKey(USER_DB_KIND, username);
 		Entity entity;
 		try 
