@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
-  <application>secured-dictionary</application>
-  <!--
-    version 1 : use auth-flows 1.1.5-SNAPSHOT
-    version 2 : use auth-flows 1.5.0-RELEASE
-  -->
-  <version>2</version>
+  <application>auth-flows-demo</application>
+  <version>1</version>
 
   <!--
     Allows App Engine to send multiple requests to one instance in parallel:
