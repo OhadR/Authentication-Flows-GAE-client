@@ -7,21 +7,142 @@
 <!-- but may lead to some differences in layout.   -->
 
 <html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Hello App Engine</title>
-  </head>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css"  href="http://projects.spring.io/spring-security/bootstrap/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" 	href="http://projects.spring.io/spring-security/font-awesome/css/font-awesome.min.css" />
+<link rel="stylesheet" type="text/css" href="http://projects.spring.io/spring-security/bootstrap/css/bootstrap-select.css"/>
+<link rel="stylesheet" type="text/css"
+	href="http://projects.spring.io/spring-security/css/main.css.css" />
+<link rel="stylesheet" type="text/css" href="http://projects.spring.io/spring-security/css/typography.css.css"/>
+<link rel="stylesheet" type="text/css" href="http://projects.spring.io/spring-security/css/icons.css.css"/>
+<link rel="stylesheet" type="text/css"
+	href="http://projects.spring.io/spring-security/css/projects.css.css" />
+<title>Hello App Engine</title>
+</head>
 
-  <body>
-    <h1>Hello App Engine!</h1>
-	
-    <table>
-      <tr>
-        <td colspan="2" style="font-weight:bold;">Available Servlets:</td>        
-      </tr>
-      <tr>
-        <td><a href="secureddictionary">SecuredDictionary</a></td>
-      </tr>
-    </table>
-  </body>
+<body>
+	<div class="billboard--wrapper project-header--wrapper">
+		<div class="billboard--container">
+			<div class="project-icon"></div>
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span8 billboard--area">
+						<div class="content--title">
+							<p>
+								<a href="http://www.ohadr.com">OHADR.COM</a>
+							</p>
+						</div>
+						<div class="project--title">
+							Authentication-Flows
+							<div class="project--links--container">
+								<a href="http://github.com/spring-projects/spring-security"
+									class="project-link"> <i class="icon-github"></i>
+								</a> <a href="http://forum.spring.io/forum/spring-projects/security"
+									class="project-link project-link-forum"> </a>
+							</div>
+						</div>
+						<div class="project--description">
+							<p>Authentication-Flows is a powerful and highly customizable
+								framework that covers all flows that authentication-server that
+								is based on Spring-Security needs.</p>
+						</div>
+						<a class="btn btn-black uppercase project-quickstart-btn"
+							href="#quick-start">Quick Start</a>
+						<a class="btn btn-black uppercase project-quickstart-btn"
+							href="secure/test">Click for Demo</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="github-fork-ribbon--container">
+		<a href="https://github.com/OhadR/oAuth2-sample"><img
+			style="position: absolute; top: 0; right: 0; border: 0;"
+			src="./image/forkme.png" alt="Fork me on GitHub"></a>
+	</div>
+
+
+	<div class="project-body--wrapper">
+		<div class="project-body--container">
+			<div class="container-fluid">
+				<div class="row-fluid">
+					<div class="span8">
+						<div class="project-body--section">
+							<p>Authentication-Flows is a framework that focuses on providing
+								all flows of authentication to Java applications built on Spring Security.
+								It saves from the application developer all the bother in developing and 
+								maintaining the code such as create account, forgot password, etc.
+								Like a Spring project, the real power of Authentication-Flows is found
+								in how easily it can be extended to meet custom requirements</p>
+
+								<p>it is completely secured. It uses a key-store (KS) to encrypt the passwords. 
+								In addition, this KS is used to encrypt the data that is sent to the user upon
+								registration, account-locking, etc. This KS is customizable by the customer</p>
+
+										<table>
+											<tr>
+												<td colspan="2" style="font-weight: bold;">Demo:</td>
+											</tr>
+											<tr>
+												<td><a href="secure/test">SecuredDictionary</a></td>
+											</tr>
+										</table>
+																	<h2 id="toc_0">Features</h2>
+							<ul>
+								<li>Comprehensive and secured support for all flows</li>
+								<li>Full integration with Spring Security</li>
+								<li>Using crypto package to secure and encrypt all data that is passed in the URLs,
+								to avoid MITM attacks</li>
+								<li>protection from account harvesting</li>
+								<li>and more...</li>
+							</ul>
+							<h2 id="toc_0">Flows:</h2>
+							<ul>
+								<li>User Registration (self enrollment)</li>
+								<li>Activation of new accounts</li>
+								<li>Forgot Password</li>
+								<li>Change Password by user request</li>
+								<li>Change Password - forces if	password is expired</li>
+								<li>Account lock-out after pre-configured failed login attempts</li>
+							</ul>
+							<p>
+								<span id="quick-start"></span>
+							</p>
+							<h2 id="toc_1">Quick Start</h2>
+							<div id="download-widget">
+								<div class="row-fluid download-widget--container">
+									<div class="download-widget--body">
+										<p>
+											The recommended way to get started using
+											<code>authentication-flows</code>
+											in your project is with a dependency management system
+											&ndash; the snippet below can be copied and pasted into your
+											build. Need help? See our getting started guides on building
+											with <a href="http://spring.io/guides/gs/maven/">Maven</a>
+											and <a href="http://spring.io/guides/gs/gradle/">Gradle</a>.
+										</p>
+										<div class="highlight">
+											<pre id="code-block-snippet">
+												<code>
+												<span class="nt">&lt;dependencies&gt;</span>
+											    	<span class="nt">&lt;dependency&gt;</span>
+											    		<span class="nt">&lt;groupId&gt;</span>com.ohadr<span
+														class="nt">&lt;/groupId&gt;</span>
+											        	<span class="nt">&lt;artifactId&gt;</span>authentication-flows<span
+														class="nt">&lt;/artifactId&gt;</span>
+											        	<span class="nt">&lt;version&gt;</span>1.5.0-RELEASE<span
+														class="nt">&lt;/version&gt;</span>
+											    	<span class="nt">&lt;/dependency&gt;</span>
+												<span class="nt">&lt;/dependencies&gt;</span>
+												</code>
+											</pre>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+
+</body>
 </html>
