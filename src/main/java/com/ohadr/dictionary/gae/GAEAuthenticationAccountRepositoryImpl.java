@@ -1,15 +1,18 @@
 package com.ohadr.dictionary.gae;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.google.appengine.api.datastore.*;
 import com.ohadr.auth_flows.core.AbstractAuthenticationAccountRepository;
-import com.ohadr.auth_flows.core.FlowsUtil;
 import com.ohadr.auth_flows.interfaces.AuthenticationUser;
 import com.ohadr.auth_flows.mocks.InMemoryAuthenticationUserImpl;
 
@@ -21,6 +24,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 	private static final String LOGIN_ATTEMPTS_LEFT_PROP_NAME = "loginAttemptsLeft";
 	private static final String ENABLED_PROP_NAME = "enabled";
 	private static final String LAST_PSWD_CHANGE_DATE_PROP_NAME = "lastPasswordChangeDate";
+	private static final String AUTHORITIES_PROP_NAME = "authorities";
 
 	private static final String USER_DB_KIND = "User";
 
@@ -64,6 +68,7 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 		dbUser.setProperty(ENABLED_PROP_NAME, user.isEnabled());
 		dbUser.setProperty(LOGIN_ATTEMPTS_LEFT_PROP_NAME, authUser.getLoginAttemptsLeft());
 		dbUser.setProperty(LAST_PSWD_CHANGE_DATE_PROP_NAME, new Date( System.currentTimeMillis()) );
+		dbUser.setProperty(AUTHORITIES_PROP_NAME, "ROLE_USER" );
 
 		datastore.put(dbUser);	
 	}
@@ -121,12 +126,18 @@ public class GAEAuthenticationAccountRepositoryImpl extends
 			loginAttemptsLeft = new Integer(loginAttemptsLeftObj.toString());
 		}
 
+		String roleName = (String)entity.getProperty(AUTHORITIES_PROP_NAME);
+		GrantedAuthority userAuth = new SimpleGrantedAuthority(roleName);
+		Collection<GrantedAuthority>  authSet = new HashSet<GrantedAuthority>();
+		authSet.add(userAuth);
+		
 		return new InMemoryAuthenticationUserImpl(
 						username, 
 						(String)entity.getProperty(PASSWORD_PROP_NAME),
 						isEnabled,
 						loginAttemptsLeft,
-						(Date)entity.getProperty(LAST_PSWD_CHANGE_DATE_PROP_NAME));
+						(Date)entity.getProperty(LAST_PSWD_CHANGE_DATE_PROP_NAME),
+						authSet);
 		
 	}
 
