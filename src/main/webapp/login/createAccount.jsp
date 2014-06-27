@@ -33,15 +33,10 @@
 							Authentication-Flows Demo: Create Account Page
 						</div>
 						<div class="project--description">
-							<p>Authentication-Flows is a powerful and highly customizable
-								framework that covers all flows that authentication-server that
-								is based on Spring-Security needs.</p>
-							<p></p>
-							<p>Flows are Create Account, Forgot Password, Change Password, etc. This demonstration
-								walks through all flows. Please login, or Create Account (using 'Authentication-Flows')</p>
-							<p></p>
 							<p>Create Account flow: an activation email will be sent to the given e-mail, with activation link.
 							   The user will have to activate his account (by clicking the link) before he can use it.</p>
+							<p>The link is created using crypto library. It contains the timestamp and the username. Encrpytion is 
+								crucial so hackers cannot intercept or forge links.</p>
 						</div>
 					</div>
 				</div>
