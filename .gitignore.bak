@@ -1,0 +1,14 @@
+*.prefs
+*.jar
+*.class
+target/
+target/classes/old.ohad.ks
+.settings/org.eclipse.wst.common.project.facet.core.xml
+target/secured-dictionary-1.0.0-SNAPSHOT/WEB-INF/log4j.properties
+target/classes/log4j.properties
+target/secured-dictionary-1.0.0-SNAPSHOT/ohad.ks
+target/secured-dictionary-1.0.0-SNAPSHOT/login/accountLocked.htm
+target/secured-dictionary-1.0.0-SNAPSHOT/login/changePassword.jsp
+.project
+.classpath
+target/secured-dictionary-1.0.0-SNAPSHOT/image/forkme.png

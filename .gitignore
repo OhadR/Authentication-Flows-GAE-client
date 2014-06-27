@@ -1,0 +1,7 @@
+*.prefs
+*.jar
+*.class
+target/
+.settings/org.eclipse.wst.common.project.facet.core.xml
+.project
+.classpath
