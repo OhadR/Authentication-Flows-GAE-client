@@ -1,5 +1,7 @@
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="../css/auth-flows.css"/>
+
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.js"></script>
 	<script type="text/javascript" src="./javascript/oauth.js"></script>
 	<title>Set New Password Page</title>

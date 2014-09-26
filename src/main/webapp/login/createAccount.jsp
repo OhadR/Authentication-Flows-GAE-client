@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="http://projects.spring.io/spring-security/css/icons.css.css"/>
 	<link rel="stylesheet" type="text/css"
 		href="http://projects.spring.io/spring-security/css/projects.css.css" />
+	<link rel="stylesheet" type="text/css" href="../css/auth-flows.css"/>
 
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.js"></script>
 	<script type="text/javascript" src="./javascript/oauth.js"></script>
@@ -44,19 +45,18 @@
 		</div>
 	</div>
 	
-	<h3>Create Account</h3>
-
-	<%   
-	    if ( null != request.getParameter("err_msg") ) {
-	%>	
-	<div style="margin-top:  25px ;position: relative; color: red; font:15px">
-		<span style="font-weight:bold"><%= request.getParameter("err_msg") %></span>
-	</div>
-	<%   } %>
 	
-	<form name='f' 
-		action='../createAccount'
-		method='POST'>
+	<form action='../createAccount' method='POST'>
+		<h3>Create Account</h3>
+	
+		<%   
+		    if ( null != request.getParameter("err_msg") ) {
+		%>	
+		<div style="margin-top:  25px ;position: relative; color: red; font:15px">
+			<span style="font-weight:bold"><%= request.getParameter("err_msg") %></span>
+		</div>
+		<%   } %>
+
 		<table>
 			<tr>
 				<td>User (Email):</td>

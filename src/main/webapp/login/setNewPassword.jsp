@@ -1,24 +1,25 @@
 <html>
 <head>
+	<link rel="stylesheet" type="text/css" href="../css/auth-flows.css"/>
+
 	<script type="text/javascript" src="https://code.jquery.com/jquery-1.4.2.js"></script>
 	<script type="text/javascript" src="./javascript/oauth.js"></script>
 	<title>Set New Password Page</title>
 </head>
 
 <body onload='document.f.password.focus();InitCreateAccount();setEnc()'>
-	<h3>Set New Password</h3>
 
-	<%   
-	    if ( null != request.getParameter("err_msg") ) {
-	%>	
-	<div style="margin-top:  25px ;position: relative; color: red; font:15px">
-		<span style="font-weight:bold"><%= request.getParameter("err_msg") %></span>
-	</div>
-	<%   } %>
+	<form action='../setNewPassword' method='POST'>
+		<h3>Set New Password</h3>
+	
+		<%   
+		    if ( null != request.getParameter("err_msg") ) {
+		%>	
+		<div style="margin-top:  25px ;position: relative; color: red; font:15px">
+			<span style="font-weight:bold"><%= request.getParameter("err_msg") %></span>
+		</div>
+		<%   } %>
 
-	<form name='f' id='f' 
-		action='../setNewPassword'
-		method='POST'>
 		<table>
 			<tr>
 				<td><input type='hidden' name='enc' /></td>
