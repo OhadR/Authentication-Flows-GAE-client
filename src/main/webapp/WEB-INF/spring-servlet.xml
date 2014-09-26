@@ -40,6 +40,8 @@
 		<sec:intercept-url pattern="/secure/**" access="ROLE_USER" />
 		<sec:anonymous/>
 
+		<sec:logout logout-url="/logout" logout-success-url="/secure/test" />
+		
 		<sec:form-login 
 			login-page="/login/login.htm" 
 			authentication-success-handler-ref="authenticationSuccessHandler"
