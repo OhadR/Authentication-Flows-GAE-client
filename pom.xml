@@ -11,7 +11,7 @@
 	<properties>
 		<worldtime.spring.version>3.1.0.RELEASE</worldtime.spring.version>
 		<ohadr.spring.security.version>3.1.0.RELEASE</ohadr.spring.security.version>
-		<appengine.target.version>1.8.0</appengine.target.version>
+		<appengine.target.version>1.8.7</appengine.target.version>
 		<ohadr.flows.version>1.6.1-SNAPSHOT</ohadr.flows.version>
 	</properties>
 
