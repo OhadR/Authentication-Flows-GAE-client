@@ -51,7 +51,7 @@ public class CustomCreateAccountEndpoint extends CreateAccountEndpoint
 	{
 		log.info("this is a custom message from postCreateAccount - notify admin");
 		
-		notifyAdmin("ohad.redlich@gmail.com",
+		notifyAdmin("ohadr.developer@gmail.com",
 				"auth-flows: new registered user",
 				"a new user has registered to auth-flows: " + username);
 		
