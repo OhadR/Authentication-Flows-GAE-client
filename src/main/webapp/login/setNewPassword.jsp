@@ -9,7 +9,7 @@
 
 <body onload='document.f.password.focus();InitCreateAccount();setEnc()'>
 
-	<form action='../setNewPassword' method='POST'>
+	<form id='f' name='f' action='../setNewPassword' method='POST'>
 		<h3>Set New Password</h3>
 	
 		<%   

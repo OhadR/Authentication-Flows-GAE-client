@@ -46,7 +46,7 @@
 	</div>
 	
 	
-	<form action='../createAccount' method='POST'>
+	<form name='f' action='../createAccount' method='POST'>
 		<h3>Create Account</h3>
 	
 		<%   
