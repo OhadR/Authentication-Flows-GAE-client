@@ -34,7 +34,7 @@ public class CustomCreateAccountEndpoint extends CreateAccountEndpoint
 
 	public void additionalValidations(String email, String password) throws AuthenticationFlowsException 
 	{
-		log.info("Benchmarkr custom validations:");
+		log.info("app-specific custom validations:");
 		
 		//make sure the email is lower-case:
 		if( ! email.equals( email.toLowerCase() ) )
