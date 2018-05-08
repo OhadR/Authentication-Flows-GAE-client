@@ -11,8 +11,8 @@
 	<properties>
 		<worldtime.spring.version>3.1.0.RELEASE</worldtime.spring.version>
 		<ohadr.spring.security.version>3.1.0.RELEASE</ohadr.spring.security.version>
-		<appengine.target.version>1.8.7</appengine.target.version>
-		<ohadr.flows.version>1.6.1-SNAPSHOT</ohadr.flows.version>
+		<appengine.target.version>1.9.63</appengine.target.version>
+		<ohadr.flows.version>1.6.1-RELEASE</ohadr.flows.version>
 	</properties>
 
 
@@ -28,6 +28,10 @@
 				<exclusion>
 					<groupId>javax.mail</groupId>
 					<artifactId>mail</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.google.appengine</groupId>
+					<artifactId>appengine-api-1.0-sdk</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
